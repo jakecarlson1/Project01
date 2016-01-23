@@ -9,10 +9,13 @@
   to an output file.
 */
 #include <iostream>
+#include <fstream>
+#include "gameboard.h"
+#include "word.h"
 
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
     cout << "Hello World!" << endl;
 
