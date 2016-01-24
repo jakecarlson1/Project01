@@ -4,6 +4,8 @@ GameBoard::GameBoard():
   size(0), capacity(10), width(-1)
 {
   board = new char*[capacity];
+  for(int i = 0; i < size; i++)
+    board[i] = 0;
 }
 
 GameBoard::~GameBoard()
@@ -17,13 +19,18 @@ GameBoard::~GameBoard()
 */
 void GameBoard::addLine(char* line)
 {
+    cout << "Here: " << board << endl;
   if(width == -1)
     width = strlen(line);
+
+  for(int i = 0; i < width; i++)
+    line[i] = tolower(line[i]);
 
   if(size == capacity)
     resize();
 
   board[size] = line;
+  //cout << board[size] << endl;
   size++;
 }
 
@@ -50,10 +57,27 @@ void GameBoard::printBoard()
 {
   cout << endl;
 
-  for(int i = 0; i < size; i++)
-  {
-    for(int j = 0; j < width; j++)
-      cout << board[i][j];
-    cout << endl;
-  }
+  cout << "Here: " << board << endl;
+    cout << "Here: " << board[1] << endl;
+
+  // for(int i = 0; i < size; i++)
+  // {
+  //   cout << board[i];
+  //   cout << endl;
+  // }
+}
+
+int GameBoard::getWidth()
+{
+  return width;
+}
+
+int GameBoard::getSize()
+{
+  return size;
+}
+
+char** GameBoard::getBoard()
+{
+  return board;
 }

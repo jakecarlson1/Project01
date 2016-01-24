@@ -1,4 +1,5 @@
 #include "word.h"
+#include "gameboard.h"
 
 
 /*
@@ -19,6 +20,7 @@ Word::Word(char* w)
   length = strlen(w);
   word = new char[strlen(w) + 1];
     strcpy(word, w);
+  cout << word << endl;
 }
 
 /*
@@ -85,4 +87,20 @@ int Word::getDirection()
 void Word::changeWordFound()
 {
   wordFound = 1;
+}
+
+void Word::searchBoard(GameBoard board)
+{
+  array = board.getBoard();
+  cout << "Searching board" << endl;
+  for(int i = 0; i < board.getSize(); i++)
+  {
+    for(int j = 0; j < board.getWidth(); j++)
+    {
+      if(word[0] == array[i][j])
+      {
+        cout << "Mathch Found: " << i << ", " << j << endl;
+      }
+    }
+  }
 }

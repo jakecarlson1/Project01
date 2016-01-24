@@ -17,21 +17,24 @@
 
 using namespace std;
 
-void input(GameBoard&, int&, char*);
+void input(GameBoard&, Word**, int&, char*);
 
 int main(int argc, char* argv[])
 {
 
-  for(int i = 1; i <= argc; i++)
-  {
+  // for(int i = 1; i < argc; i++)
+  // {
     int p = -1;
+    Word** words;
 
     GameBoard board;
+    cout << "Input.\n";
+    input(board, words, p, argv[1]);
+    cout << "Print board.\n";
+    board.printBoard();
 
-    input(board, p, argv[i]);
-
-    board.~GameBoard();
-  }
+    // board.~GameBoard();
+  // }
 
   return 0;
 }
@@ -41,7 +44,7 @@ int main(int argc, char* argv[])
   initial characters are read in and stored until the p-value is found. input
   saves the p-value and then creates p-many Word objects and reads into them
 */
-void input(GameBoard& board, int& p, char* file)
+void input(GameBoard& board, Word** words, int& p, char* file)
 {
   ifstream fin;
   char buffer[1001];
@@ -52,10 +55,24 @@ void input(GameBoard& board, int& p, char* file)
   else
   {
     while(fin.getline(buffer, 1001) && p == -1)
-      board.addLine(buffer);
+    {
+      cout << buffer << endl;
+      if(buffer[0] >= '0' && buffer[0] <= '9')
+      {
+        p = static_cast<int>(*buffer);
+        break;
+      }
+      else
+        board.addLine(buffer);
+    }
+    words = new Word*[p];
+    for(int i = 0; i < p; i++)
+    {
+      fin.getline(buffer, 1001);
+      words[i] = new Word(buffer);
+      words[i]->searchBoard(board);
+    }
   }
-
-  //if the line is an integer, save it to p and begin storing words
 
   fin.close();
 }

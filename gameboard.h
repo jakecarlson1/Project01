@@ -23,6 +23,9 @@ public:
 
   void addLine(char*);
   void printBoard();
+  int getWidth();
+  int getSize();
+  char** getBoard();
 };
 
 #endif // GAMEBOARD_H

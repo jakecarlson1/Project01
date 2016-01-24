@@ -5,6 +5,7 @@
 #include <cstring>
 #include <cctype>
 #include <fstream>
+#include "gameboard.h"
 using namespace std;
 
 class Word
@@ -16,6 +17,7 @@ private:
   int yCoord;
   int direction;
   bool wordFound;
+  char** array;
 
 public:
   Word();
@@ -24,6 +26,7 @@ public:
 
   char* getWord();
   void printInfo();
+  void searchBoard(GameBoard);
 
   void setXCoord(int);
   int getXCoord();
