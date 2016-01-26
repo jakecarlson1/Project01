@@ -20,7 +20,7 @@ Word::Word(char* w)
   length = strlen(w);
   word = new char[strlen(w) + 1];
     strcpy(word, w);
-  cout << word << endl;
+  //cout << word << endl;
 }
 
 /*
@@ -47,7 +47,25 @@ char* Word::getWord()
 */
 void Word::printInfo()
 {
-
+  //will change to fout
+  cout << word << "|" << xCoord << "|" << yCoord << "|";
+  if(direction == 1)
+    cout << "ul";
+  else if(direction == 2)
+    cout << "u";
+  else if(direction == 3)
+    cout << "ur";
+  else if(direction == 4)
+    cout << "r";
+  else if(direction == 5)
+    cout << "dr";
+  else if(direction == 6)
+    cout << "d";
+  else if(direction == 7)
+    cout << "dl";
+  else if(direction == 8)
+    cout << "l";
+  cout << endl;
 }
 
 /**********************
@@ -91,16 +109,20 @@ void Word::changeWordFound()
 
 void Word::searchBoard(GameBoard board)
 {
-  array = board.getBoard();
+  array = new char*[board.getSize()];
+  // for(int i = 0; i < board.getSize(); i++)
+  // {
+  //   array[i] = board[i];
+  // }
   cout << "Searching board" << endl;
-  for(int i = 0; i < board.getSize(); i++)
-  {
-    for(int j = 0; j < board.getWidth(); j++)
-    {
-      if(word[0] == array[i][j])
-      {
-        cout << "Mathch Found: " << i << ", " << j << endl;
-      }
-    }
-  }
+  // for(int i = 0; i < board.getSize(); i++)
+  // {
+  //   for(int j = 0; j < board.getWidth(); j++)
+  //   {
+  //     if(word[0] == array[i][j])
+  //     {
+  //       cout << "Mathch Found: " << i << ", " << j << endl;
+  //     }
+  //   }
+  // }
 }

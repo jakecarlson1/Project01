@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
     GameBoard board;
     cout << "Input.\n";
-    input(board, words, p, argv[1]);
+    input(board, words, p, argv[1]); //1 should be i
     cout << "Print board.\n";
     board.printBoard();
 
@@ -54,23 +54,29 @@ void input(GameBoard& board, Word** words, int& p, char* file)
     cout << "Could not open file: " << file << endl;
   else
   {
+    //saves the lines of the input file while p has not been found
     while(fin.getline(buffer, 1001) && p == -1)
     {
       cout << buffer << endl;
+      //saves p when it is found, if it hasn't been found the line is saved
       if(buffer[0] >= '0' && buffer[0] <= '9')
       {
-        p = static_cast<int>(*buffer);
+        p = *buffer - 48;
         break;
       }
       else
         board.addLine(buffer);
     }
+    cout << "p: " << p << endl;
+    board.printBoard();
+    //creates p-many Word object pointers
     words = new Word*[p];
+    //saves the word and runs the search function
     for(int i = 0; i < p; i++)
     {
       fin.getline(buffer, 1001);
       words[i] = new Word(buffer);
-      words[i]->searchBoard(board);
+      words[i]->searchBoard(board); //there is a problem here
     }
   }
 
