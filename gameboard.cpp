@@ -10,7 +10,8 @@ GameBoard::GameBoard():
 
 GameBoard::~GameBoard()
 {
-  delete[] board;
+  //delete[] board;
+  cout << "tried to delete board" << endl;
 }
 /*
   addLine take a char* input. It updates the width of the board. It then checks

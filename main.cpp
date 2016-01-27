@@ -17,7 +17,8 @@
 
 using namespace std;
 
-void input(GameBoard&, Word**, int&, char*);
+void input(GameBoard&, Word**&, int&, char*);
+void output(Word**, int);
 
 int main(int argc, char* argv[])
 {
@@ -32,6 +33,7 @@ int main(int argc, char* argv[])
     input(board, words, p, argv[1]); //1 should be i
     cout << "Print board.\n";
     board.printBoard();
+    output(words, p);
 
     // board.~GameBoard();
   // }
@@ -44,7 +46,7 @@ int main(int argc, char* argv[])
   initial characters are read in and stored until the p-value is found. input
   saves the p-value and then creates p-many Word objects and reads into them
 */
-void input(GameBoard& board, Word** words, int& p, char* file)
+void input(GameBoard& board, Word**& words, int& p, char* file)
 {
   ifstream fin;
   char buffer[1001];
@@ -81,4 +83,12 @@ void input(GameBoard& board, Word** words, int& p, char* file)
   }
 
   fin.close();
+}
+
+void output(Word** words, int p)
+{
+  cout << "output: " << p << endl;
+  for(int i = 0; i < p; i++)
+    words[i]->printInfo();
+  cout << endl;
 }

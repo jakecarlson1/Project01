@@ -169,7 +169,7 @@ void Word::searchBoard(GameBoard board)
   for-loop runs to see if a letter does not match the space that it is supposed
   to in the board. If a letter does not match then wordFound is set back to
   false. At the end of the loop if wordFound is still true then the word has
-  been found and the direction is saved. 
+  been found and the direction is saved.
 */
 void Word::searchUL(int x, int y)
 {
@@ -181,7 +181,11 @@ void Word::searchUL(int x, int y)
       wordFound = 0;
   }
   if(wordFound == 1)
+  {
     direction = 1;
+    xCoord = x + 1;
+    yCoord = y + 1;
+  }
 }
 
 void Word::searchU(int x, int y)
@@ -194,7 +198,11 @@ void Word::searchU(int x, int y)
       wordFound = 0;
   }
   if(wordFound == 1)
+  {
     direction = 2;
+    xCoord = x + 1;
+    yCoord = y + 1;
+  }
 }
 
 void Word::searchUR(int x, int y)
@@ -207,7 +215,11 @@ void Word::searchUR(int x, int y)
       wordFound = 0;
   }
   if(wordFound == 1)
+  {
     direction = 3;
+    xCoord = x + 1;
+    yCoord = y + 1;
+  }
 }
 
 void Word::searchR(int x, int y)
@@ -220,7 +232,11 @@ void Word::searchR(int x, int y)
       wordFound = 0;
   }
   if(wordFound == 1)
+  {
     direction = 4;
+    xCoord = x + 1;
+    yCoord = y + 1;
+  }
 }
 
 void Word::searchDR(int x, int y)
@@ -233,7 +249,11 @@ void Word::searchDR(int x, int y)
       wordFound = 0;
   }
   if(wordFound == 1)
+  {
     direction = 5;
+    xCoord = x + 1;
+    yCoord = y + 1;
+  }
 }
 
 void Word::searchD(int x, int y)
@@ -246,7 +266,11 @@ void Word::searchD(int x, int y)
       wordFound = 0;
   }
   if(wordFound == 1)
+  {
     direction = 6;
+    xCoord = x + 1;
+    yCoord = y + 1;
+  }
 }
 
 void Word::searchDL(int x, int y)
@@ -259,7 +283,11 @@ void Word::searchDL(int x, int y)
       wordFound = 0;
   }
   if(wordFound == 1)
+  {
     direction = 7;
+    xCoord = x + 1;
+    yCoord = y + 1;
+  }
 }
 
 void Word::searchL(int x, int y)
@@ -272,5 +300,9 @@ void Word::searchL(int x, int y)
       wordFound = 0;
   }
   if(wordFound == 1)
+  {
     direction = 8;
+    xCoord = x + 1;
+    yCoord = y + 1;
+  }
 }
