@@ -26,6 +26,7 @@ public:
   int getWidth();
   int getSize();
   char** getBoard();
+  char* operator[] (int);
 };
 
 #endif // GAMEBOARD_H

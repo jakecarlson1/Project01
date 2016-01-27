@@ -86,3 +86,8 @@ char** GameBoard::getBoard()
 {
   return board;
 }
+
+char* GameBoard::operator[](int i)
+{
+  return board[i];
+}

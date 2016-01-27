@@ -6,7 +6,7 @@
   Word default constructor with initialization of variables
 */
 Word::Word():
-  length(25), xCoord(0), yCoord(0), direction(0), wordFound(0)
+  length(0), xCoord(0), yCoord(0), direction(0), wordFound(0)
 {
   word = 0;
 }
@@ -110,19 +110,140 @@ void Word::changeWordFound()
 void Word::searchBoard(GameBoard board)
 {
   array = new char*[board.getSize()];
-  // for(int i = 0; i < board.getSize(); i++)
-  // {
-  //   array[i] = board[i];
-  // }
+  for(int i = 0; i < board.getSize(); i++)
+  {
+    array[i] = board[i];
+  }
   cout << "Searching board" << endl;
-  // for(int i = 0; i < board.getSize(); i++)
-  // {
-  //   for(int j = 0; j < board.getWidth(); j++)
-  //   {
-  //     if(word[0] == array[i][j])
-  //     {
-  //       cout << "Mathch Found: " << i << ", " << j << endl;
-  //     }
-  //   }
-  // }
+  for(int i = 0; i < board.getSize(); i++)
+  {
+    for(int j = 0; j < board.getWidth(); j++)
+    {
+      if(word[0] == array[i][j] && wordFound == 0)
+      {
+        cout << "Match Found: " << i << ", " << j << endl;
+        if(i - length >= -1 && j - length >= -1)
+          searchUL(i, j);
+        if(i - length >= -1)
+          searchU(i, j);
+        if(i - length >= -1 && board.getWidth() - length >= j)
+          searchUR(i, j);
+        if(board.getWidth() - length >= j)
+          searchR(i, j);
+        if(board.getSize() - length >= i && board.getWidth() - length >= j)
+          searchDR(i, j);
+        if(board.getSize() - length >= i)
+          searchD(i, j);
+        if(board.getSize() - length >= i && j - length >= -1)
+          searchDL(i, j);
+        if(j - length >= -1)
+          searchL(i, j);
+        cout << "direction: " << direction << endl;
+      }
+    }
+  }
+}
+
+void Word::searchUL(int x, int y)
+{
+  cout << "--ran searchUL--" << endl;
+  wordFound = 1;
+  for(int i = 1; i < length; i++)
+  {
+    if(word[i] != array[x - i][y - i])
+      wordFound = 0;
+  }
+  if(wordFound == 1)
+    direction = 1;
+}
+
+void Word::searchU(int x, int y)
+{
+  cout << "--ran searchU--" << endl;
+  wordFound = 1;
+  for(int i = 1; i < length; i++)
+  {
+    if(word[i] != array[x - i][y])
+      wordFound = 0;
+  }
+  if(wordFound == 1)
+    direction = 2;
+}
+
+void Word::searchUR(int x, int y)
+{
+  cout << "--ran searchUR--" << endl;
+  wordFound = 1;
+  for(int i = 1; i < length; i++)
+  {
+    if(word[i] != array[x - i][y + i])
+      wordFound = 0;
+  }
+  if(wordFound == 1)
+    direction = 3;
+}
+
+void Word::searchR(int x, int y)
+{
+  cout << "--ran searchR--" << endl;
+  wordFound = 1;
+  for(int i = 1; i < length; i++)
+  {
+    if(word[i] != array[x][y + i])
+      wordFound = 0;
+  }
+  if(wordFound == 1)
+    direction = 4;
+}
+
+void Word::searchDR(int x, int y)
+{
+  cout << "--ran searchDR--" << endl;
+  wordFound = 1;
+  for(int i = 1; i < length; i++)
+  {
+    if(word[i] != array[x + i][y + i])
+      wordFound = 0;
+  }
+  if(wordFound == 1)
+    direction = 5;
+}
+
+void Word::searchD(int x, int y)
+{
+  cout << "--ran searchD--" << endl;
+  wordFound = 1;
+  for(int i = 1; i < length; i++)
+  {
+    if(word[i] != array[x + i][y])
+      wordFound = 0;
+  }
+  if(wordFound == 1)
+    direction = 6;
+}
+
+void Word::searchDL(int x, int y)
+{
+  cout << "--ran searchDL--" << endl;
+  wordFound = 1;
+  for(int i = 1; i < length; i++)
+  {
+    if(word[i] != array[x + i][y - i])
+      wordFound = 0;
+  }
+  if(wordFound == 1)
+    direction = 7;
+}
+
+void Word::searchL(int x, int y)
+{
+  cout << "--ran searchL--" << endl;
+  wordFound = 1;
+  for(int i = 1; i < length; i++)
+  {
+    if(word[i] != array[x][y - i])
+      wordFound = 0;
+  }
+  if(wordFound == 1)
+    direction = 8;
 }

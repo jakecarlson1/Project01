@@ -19,6 +19,15 @@ private:
   bool wordFound;
   char** array;
 
+  void searchUL(int, int);
+  void searchU(int, int);
+  void searchUR(int, int);
+  void searchR(int, int);
+  void searchDR(int, int);
+  void searchD(int, int);
+  void searchDL(int, int);
+  void searchL(int, int);
+
 public:
   Word();
   Word(char*);
