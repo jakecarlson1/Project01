@@ -107,21 +107,37 @@ void Word::changeWordFound()
   wordFound = 1;
 }
 
+/*
+  The following functions search the GameBoard for the word. A copy of the
+  board is saved and then the function begins to search. First the function
+  looks for anywhere the first letter of the word appears in the board. The
+  folling if-statements only allow the word to search the board if it is within
+  the scope of the related search algorithm (if the first letter of the word
+  is in the upper left corner of the board, there is no need to search UL, U,
+  UR, DL, or L because the word cannot possibly fit in these directions). Once
+  the word is found the direction the word was found in is saved and the
+  searching stops.
+*/
 void Word::searchBoard(GameBoard board)
 {
+  //a copy of the board is saved
   array = new char*[board.getSize()];
   for(int i = 0; i < board.getSize(); i++)
   {
     array[i] = board[i];
   }
+  //searching starts
   cout << "Searching board" << endl;
   for(int i = 0; i < board.getSize(); i++)
   {
     for(int j = 0; j < board.getWidth(); j++)
     {
+      //if the first letter is found the searching gets more specific
       if(word[0] == array[i][j] && wordFound == 0)
       {
         cout << "Match Found: " << i << ", " << j << endl;
+        //all of the following if-statements determine if the first letter is
+        //in a place where the folling search function is applicable
         if(i - length >= -1 && j - length >= -1)
           searchUL(i, j);
         if(i - length >= -1)
@@ -142,8 +158,19 @@ void Word::searchBoard(GameBoard board)
       }
     }
   }
+  //deallocates the copy of board
+  delete[] array;
 }
 
+/*
+  The following direction-specific search functions each check one of the eight
+  possible directions for the word from the first letter. They each opperate in
+  a similar way. First they make the assumption that the word is found. Then a
+  for-loop runs to see if a letter does not match the space that it is supposed
+  to in the board. If a letter does not match then wordFound is set back to
+  false. At the end of the loop if wordFound is still true then the word has
+  been found and the direction is saved. 
+*/
 void Word::searchUL(int x, int y)
 {
   cout << "--ran searchUL--" << endl;
