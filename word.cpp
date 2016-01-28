@@ -83,17 +83,16 @@ void Word::searchBoard(GameBoard& board)
   for(int i = 0; i < board.getSize(); i++)
   {
     array[i] = new char[board.getWidth()];
-    strcpy(array[i], board[i]); //there is a problem here
+    strcpy(array[i], board[i]);
   }
-  // for(int i = 0; i < board.getSize(); i++)
-  //   cout << array[i] << endl;
+
   //searching starts
   for(int i = 0; i < board.getSize(); i++)
   {
     for(int j = 0; j < board.getWidth(); j++)
     {
       //if the first letter is found the searching gets more specific
-      if(word[0] == board[i][j] && wordFound == 0)
+      if(word[0] == array[i][j] && wordFound == 0)
       {
         //all of the following if-statements determine if the first letter is
         //in a place where the folling search function is applicable
