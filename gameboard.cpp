@@ -11,7 +11,7 @@ GameBoard::GameBoard():
 GameBoard::~GameBoard()
 {
   for(int i = 0; i < capacity; i++)
-    delete board[i];
+    delete[] board[i];
   delete[] board;
 }
 /*
@@ -48,6 +48,8 @@ void GameBoard::resize()
   for(int i = 0; i < 5; i++)
     temp[size + i] = new char[width + 1];
   //deletes the old board array
+  for(int i = 0; i < size; i++)
+    delete[] board[i];
   delete[]board;
   //increments capazity
   capacity += 5;

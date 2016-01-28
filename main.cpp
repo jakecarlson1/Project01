@@ -102,5 +102,5 @@ void output(Word** words, int p, char* file)
   //memory deallocation
   for(int i = 0; i < p; i++)
     delete words[i];
-  delete plog;
+  delete[] plog;
 }

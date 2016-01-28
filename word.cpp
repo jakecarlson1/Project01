@@ -28,7 +28,6 @@ Word::Word(char* w)
 */
 Word::~Word()
 {
-  if(word != 0)
     delete[] word;
 }
 
@@ -40,7 +39,7 @@ void Word::printInfo(ofstream& fout)
 {
   if(direction == 0)
   {
-    fout << word << "|-1";
+    fout << word << "|-1|-1";
   }
   else
   {
@@ -116,6 +115,8 @@ void Word::searchBoard(GameBoard& board)
     }
   }
   //deallocates the copy of board
+  for(int i = 0; i < board.getSize(); i++)
+    delete[] array[i];
   delete[] array;
 }
 
