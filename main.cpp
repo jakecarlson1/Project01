@@ -18,25 +18,19 @@
 using namespace std;
 
 void input(GameBoard&, Word**&, int&, char*);
-void output(Word**, int);
+void output(Word**, int, char*);
 
 int main(int argc, char* argv[])
 {
-
-  // for(int i = 1; i < argc; i++)
-  // {
+  //for-loop runs the same sequence for each input file from the command line
+  for(int i = 1; i < argc; i++)
+  {
     int p = -1;
     Word** words;
-
     GameBoard board;
-    cout << "Input.\n";
-    input(board, words, p, argv[1]); //1 should be i
-    cout << "Print board.\n";
-    board.printBoard();
-    output(words, p);
-
-    // board.~GameBoard();
-  // }
+    input(board, words, p, argv[i]);
+    output(words, p, argv[i]);
+  }
 
   return 0;
 }
@@ -59,18 +53,15 @@ void input(GameBoard& board, Word**& words, int& p, char* file)
     //saves the lines of the input file while p has not been found
     while(fin.getline(buffer, 1001) && p == -1)
     {
-      cout << buffer << endl;
       //saves p when it is found, if it hasn't been found the line is saved
       if(buffer[0] >= '0' && buffer[0] <= '9')
       {
-        p = *buffer - 48;
+        p = atoi(buffer);
         break;
       }
       else
         board.addLine(buffer);
     }
-    cout << "p: " << p << endl;
-    board.printBoard();
     //creates p-many Word object pointers
     words = new Word*[p];
     //saves the word and runs the search function
@@ -78,17 +69,38 @@ void input(GameBoard& board, Word**& words, int& p, char* file)
     {
       fin.getline(buffer, 1001);
       words[i] = new Word(buffer);
-      words[i]->searchBoard(board); //there is a problem here
+      words[i]->searchBoard(board);
     }
   }
 
   fin.close();
 }
 
-void output(Word** words, int p)
+/*
+  output changes the end of the input file from .in to .out. It then has all
+  of the words print their info into the file and then closes the file. output
+  deallocates the memory used for the word objects and the output file name.
+*/
+void output(Word** words, int p, char* file)
 {
-  cout << "output: " << p << endl;
+  //file name generation
+  char* plog = new char[strlen(file) + 2];
+  strcpy(plog, file);
+  plog[strlen(file) - 2] = 'o';
+  plog[strlen(file) - 1] = 'u';
+  plog[strlen(file)] = 't';
+
+  ofstream fout;
+
+  //saving the word info to the output file
+  fout.open(plog);
   for(int i = 0; i < p; i++)
-    words[i]->printInfo();
-  cout << endl;
+    words[i]->printInfo(fout);
+  fout << endl;
+  fout.close();
+
+  //memory deallocation
+  for(int i = 0; i < p; i++)
+    delete words[i];
+  delete plog;
 }

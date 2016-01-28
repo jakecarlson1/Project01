@@ -22,7 +22,6 @@ public:
   ~GameBoard();
 
   void addLine(char*);
-  void printBoard();
   int getWidth();
   int getSize();
   char** getBoard();

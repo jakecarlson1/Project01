@@ -10,8 +10,9 @@ GameBoard::GameBoard():
 
 GameBoard::~GameBoard()
 {
-  //delete[] board;
-  cout << "tried to delete board" << endl;
+  for(int i = 0; i < capacity; i++)
+    delete board[i];
+  delete[] board;
 }
 /*
   addLine take a char* input. It updates the width of the board. It then checks
@@ -20,7 +21,6 @@ GameBoard::~GameBoard()
 */
 void GameBoard::addLine(char* line)
 {
-  cout << "Here: " << board << endl;
   if(width == -1)
   {
     width = strlen(line);
@@ -35,7 +35,6 @@ void GameBoard::addLine(char* line)
     resize();
 
   strcpy(board[size], line);
-  cout << board[size] << endl;
   size++;
 }
 
@@ -54,23 +53,6 @@ void GameBoard::resize()
   capacity += 5;
   //points board to the new, bigger array
   board = temp;
-  cout << "resize ran" << endl;
-}
-
-/*
-  printBoard function is for use in debuging. Prints the board
-*/
-void GameBoard::printBoard()
-{
-  cout << endl;
-
-  cout << "Here: " << board << endl;
-  // cout << "Here: " << board[0] << endl;
-  for(int i = 0; i < size; i++)
-  {
-    cout << board[i];
-    cout << "." << endl;
-  }
 }
 
 int GameBoard::getWidth()
