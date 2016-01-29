@@ -7,6 +7,9 @@
   searches the array of characters at the top of the file for the words stored
   at the bottom of the file. The progrm then prints information about each word
   to an output file.
+
+  The GitHub repository this program was built in can be found here:
+  https://github.com/jakecarlson1/Project01
 */
 #include <iostream>
 #include <cstring>
