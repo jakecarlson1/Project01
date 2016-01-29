@@ -6,7 +6,7 @@
   Word default constructor with initialization of variables
 */
 Word::Word():
-  length(0), xCoord(0), yCoord(0), direction(0), wordFound(0)
+  length(0), xCoord(-1), yCoord(-1), direction(0), wordFound(0)
 {
   word = 0;
 }
@@ -39,11 +39,13 @@ void Word::printInfo(ofstream& fout)
 {
   if(direction == 0)
   {
-    fout << word << "|-1|-1";
+    fout << word << "|-1|-1|";
   }
   else
   {
   fout << word << "|" << xCoord << "|" << yCoord << "|";
+  // if(direction == 0)
+  //   fout << " ";
   if(direction == 1)
     fout << "ul";
   else if(direction == 2)
