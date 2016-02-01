@@ -44,8 +44,6 @@ void Word::printInfo(ofstream& fout)
   else
   {
   fout << word << "|" << xCoord << "|" << yCoord << "|";
-  // if(direction == 0)
-  //   fout << " ";
   if(direction == 1)
     fout << "ul";
   else if(direction == 2)
