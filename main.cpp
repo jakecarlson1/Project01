@@ -21,7 +21,7 @@
 using namespace std;
 
 void input(GameBoard&, Word**&, int&, char*);
-void output(Word**, int, char*);
+void output(Word**&, int, char*);
 
 int main(int argc, char* argv[])
 {
@@ -84,7 +84,7 @@ void input(GameBoard& board, Word**& words, int& p, char* file)
   of the words print their info into the file and then closes the file. output
   deallocates the memory used for the word objects and the output file name.
 */
-void output(Word** words, int p, char* file)
+void output(Word**& words, int p, char* file)
 {
   //file name generation
   char* plog = new char[strlen(file) + 2];
